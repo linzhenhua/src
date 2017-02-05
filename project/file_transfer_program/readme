@@ -1,0 +1,18 @@
+编译：
+gcc -Wall -o transfer_client transfer_client.c
+gcc -Wall -o transfer_server transfer_server.c
+
+运行：
+先运行服务端
+./transfer_server
+再运行客户端
+usage: a.out <IPaddress>
+比如: ./transfer_client 127.0.0.1
+
+warning:
+只能传输文件，而不是文件夹
+
+操作:
+如若要把文件从客户端传输到服务端
+先运行客户端，再选择传输文件，这时运行服务端，再选择接收文件，这样
+才可以正确收发文件
