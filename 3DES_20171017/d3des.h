@@ -32,7 +32,7 @@ extern void deskey(unsigned char *, short);
  * Sets the internal key register according to the hexadecimal 
  * key contained in the 8 bytes of hexkey, according to the DES, 
  * for encryption or decryption according to MODE. 
- */  
+ */
   
 extern void usekey(unsigned long *);  
 /*          cookedkey[32] 
@@ -51,7 +51,7 @@ extern void des(unsigned char *, unsigned char *);
  * internal key register) one block of eight bytes at address 'from' 
  * into the block at address 'to'.  They can be the same. 
  */  
-  
+ 
 #ifdef D2_DES  
   
 #define desDkey(a,b)    des2key((a),(b))  
@@ -69,21 +69,21 @@ extern void Ddes(unsigned char *, unsigned char *);
  * internal key registerS) one block of eight bytes at address 'from' 
  * into the block at address 'to'.  They can be the same. 
  */  
-  
+
 extern void D2des(unsigned char *, unsigned char *);  
 /*          from[16]          to[16] 
  * Encrypts/Decrypts (according to the keyS currently loaded in the 
  * internal key registerS) one block of SIXTEEN bytes at address 'from' 
  * into the block at address 'to'.  They can be the same. 
  */  
-  
+ 
 extern void makekey(char *, unsigned char *);  
 /*      *password,  single-length key[8] 
  * With a double-length default key, this routine hashes a NULL-terminated 
  * string into an eight-byte random-looking key, suitable for use with the 
  * deskey() routine. 
  */  
-  
+ 
 #define makeDkey(a,b)   make2key((a),(b))  
 extern void make2key(char *, unsigned char *);  
 /*      *password,  double-length key[16] 
@@ -91,7 +91,7 @@ extern void make2key(char *, unsigned char *);
  * string into a sixteen-byte random-looking key, suitable for use with the 
  * des2key() routine. 
  */  
-  
+ 
 #ifndef D3_DES  /* D2_DES only */  
   
 #define useDkey(a)  use2key((a))  
@@ -125,20 +125,20 @@ extern void use3key(unsigned long *);
 /*          cookedkey[96] 
  * Loads the 3 internal key registerS with the data in cookedkey. 
  */  
-  
+
 extern void cp3key(unsigned long *);  
 /*         cookedkey[96] 
  * Copies the contents of the 3 internal key registerS into the storage 
  * located at &cookedkey[0]. 
  */  
-  
+ 
 extern void make3key(char *, unsigned char *);  
 /*      *password,  triple-length key[24] 
  * With a triple-length default key, this routine hashes a NULL-terminated 
  * string into a twenty-four-byte random-looking key, suitable for use with 
  * the des3key() routine. 
  */  
-  
+
 #endif  /* D3_DES */  
 #endif  /* D2_DES */  
   
