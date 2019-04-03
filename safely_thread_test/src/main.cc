@@ -51,7 +51,7 @@ public:
     }
 
 private:
-    int *val_;
+    int* val_;
 };
 
 class Test2 {
@@ -61,11 +61,11 @@ public:
     {
     }
 
-	~Test2(){}
+    ~Test2() {}
 
-	void print()
+    void print()
     {
-        std::cout << "t1_ = " << t1_->print() << std::endl;
+        t1_->print();
     }
 
 private:
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 {
     Test1 t(1);
 
-	t.print();
+    t.print();
 
     return 0;
 }
