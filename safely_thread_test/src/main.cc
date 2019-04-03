@@ -31,7 +31,6 @@
 //    std::cout << std::thread::hardware_concurrency() << std::endl;
 //}
 
-//线程安全测试 begin
 class Test1 {
 public:
     Test1(int i)
@@ -61,34 +60,56 @@ public:
         t->print();
     }
 };
-//线程安全测试 end
 
-void test(Test1 *t)
+void test(Test1* t)
 {
-    //std::shared_ptr<Test1> t1(t);
-
+    //直接判断指针是否为空是不行的
     if (t == nullptr)
         return;
 
     t->print();
 }
 
+//这个是线程不安全的
 void thread_safe_test()
 {
     Test1 t1(1);
 
-    //t1.print();
+    t1.print();
 
-    t1.~Test1();
+    t1.~Test1();  //模拟多线程环境中对象被销毁
 
-    std::thread th1(test, &t1);
+    std::thread th1(test, &t1);  //模拟对象被多个线程看到
 
 	th1.join();
 }
 
+void test_v2(std::weak_ptr<Test1>& t)
+{
+    std::shared_ptr<Test1> obj(t.lock());
+    if (obj) {
+        obj->print();
+	}
+}
+
+void thread_safe_test_v2()
+{
+    std::shared_ptr<Test1> t1 = std::make_shared<Test1>(1);
+
+    t1->print();
+
+    t1.~Test1(); //模拟多线程环境中对象被销毁
+
+    std::thread th1(test, t1); //模拟对象被多个线程看到
+
+    th1.join();
+}
+
 int main(int argc, char** argv)
 {
-    thread_safe_test();
+    //thread_safe_test();
+
+	thread_safe_test_v2();
 
     return 0;
 }
