@@ -56,7 +56,7 @@ private:
 
 class Test2 {
 public:
-    Test2(const Test1* t)
+    Test2(Test1* t)
         : t1_(t)
     {
     }
