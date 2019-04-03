@@ -84,7 +84,7 @@ void thread_safe_test()
 	th1.join();
 }
 
-void test_v2(std::weak_ptr<Test1>& t)
+void test_v2(std::weak_ptr<Test1> t)
 {
     std::shared_ptr<Test1> obj(t.lock());
     if (obj) {
