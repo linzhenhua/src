@@ -69,6 +69,8 @@ int main(int argc, char** argv)
     Test1 t1(1);
 
     //t1.print();
+	
+	t1.~Test1();
 
 	Test2 t2;
     t2.print(&t1);
