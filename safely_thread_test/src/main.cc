@@ -58,6 +58,11 @@ class Test2 {
 public:
     void print(Test1 *t)
     {
+        //std::shared_ptr<Test1> t1(t);
+
+		if (t == nullptr)
+            return;
+
         t->print();
     }
 };
