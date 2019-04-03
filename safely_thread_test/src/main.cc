@@ -98,7 +98,7 @@ void thread_safe_test_v2()
 
     t1->print();
 
-    t1.~Test1(); //模拟多线程环境中对象被销毁
+    t1->~Test1(); //模拟多线程环境中对象被销毁
 
     std::thread th1(test, t1); //模拟对象被多个线程看到
 
