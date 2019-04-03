@@ -56,29 +56,22 @@ private:
 
 class Test2 {
 public:
-    Test2(Test1* t)
-        : t1_(t)
+    void print(Test1 *t)
     {
+        t->print();
     }
-
-    ~Test2() {}
-
-    void print()
-    {
-        t1_->print();
-    }
-
-private:
-    Test1* t1_;
 };
 
 //线程安全测试 end
 
 int main(int argc, char** argv)
 {
-    Test1 t(1);
+    Test1 t1(1);
 
-    t.print();
+    //t1.print();
+
+	Test2 t2;
+    t2.print(&t1);
 
     return 0;
 }
