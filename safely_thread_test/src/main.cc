@@ -92,8 +92,8 @@ void test_v2(std::weak_ptr<Test1> t)
 
 	sleep(5);
 
-    std::cout << t.use_count() << std::endl;
-    std::cout << obj.use_count() << std::endl;
+    std::cout << "t.use_count():" << t.use_count() << std::endl;
+    std::cout << "obj.use_count():" << obj.use_count() << std::endl;
 
     if (obj) {
         obj->print();
@@ -110,7 +110,7 @@ void thread_safe_test_v2()
 
 	sleep(1);
 	t1.reset(); //清空t1,模拟多线程环境中对象被销毁
-
+    std::cout << "t1.use_count():" << t1.use_count() << std::endl;
     th1.join();
 }
 
