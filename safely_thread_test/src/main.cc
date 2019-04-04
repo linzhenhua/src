@@ -90,9 +90,10 @@ void test_v2(std::weak_ptr<Test1> t)
 {
     std::shared_ptr<Test1> obj(t.lock());
 
-	sleep(2);
+	sleep(5);
 
     std::cout << t.use_count() << std::endl;
+    std::cout << obj.use_count() << std::endl;
 
     if (obj) {
         obj->print();
@@ -107,6 +108,7 @@ void thread_safe_test_v2()
 
     std::thread th1(test_v2, t1); //模拟对象被多个线程看到
 
+	sleep(1);
 	t1.reset(); //清空t1,模拟多线程环境中对象被销毁
 
     th1.join();
