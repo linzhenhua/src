@@ -103,6 +103,7 @@ void thread_safe_test_v2()
 	std::shared_ptr<Test1> t2 = t1;
 
 	std::cout << t2.use_count() << std::endl;
+    std::cout << t1.use_count() << std::endl;
 
     t1.reset(); //模拟多线程环境中对象被销毁
 
