@@ -88,7 +88,7 @@ void thread_safe_test()
 
 void test_v2(std::weak_ptr<Test1> t)
 {
-    std::shared_ptr<Test1> obj(t.lock());
+    std::shared_ptr<Test1> obj(t.lock());   //lock线程安全
 
 	sleep(5);
 
