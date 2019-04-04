@@ -19,13 +19,13 @@
 //        threads.push_back(std::thread(do_work, i));
 //    }
 //
-//    //ÓÉÓÚthreadÊÇ½ûÖ¹¸´ÖÆ¹¹Ôìº¯Êı£¬Deleted constructor form (thread objects cannot be copied).
-//    //ËùÒÔ[](std::thread th)²»ĞĞ£¬ĞèÒªÒıÓÃ[](std::thread &th)
+//    //ç”±äºthreadæ˜¯ç¦æ­¢å¤åˆ¶æ„é€ å‡½æ•°ï¼ŒDeleted constructor form (thread objects cannot be copied).
+//    //æ‰€ä»¥[](std::thread th)ä¸è¡Œï¼Œéœ€è¦å¼•ç”¨[](std::thread &th)
 //    std::for_each(threads.begin(), threads.end(), [](std::thread& th) { th.join(); /*std::cout << "hello world" << std::endl;*/ });
 //
-//    //std::for_each(threads.begin(), threads.end(), std::mem_fn(&std::thread::join));   //¿ÉÒÔ
+//    //std::for_each(threads.begin(), threads.end(), std::mem_fn(&std::thread::join));   //å¯ä»¥
 //
-//    //Êµ¼ÊÒªÕâÑùĞ´±È½ÏºÃ
+//    //å®é™…è¦è¿™æ ·å†™æ¯”è¾ƒå¥½
 //    //for (auto& thread : threads) {
 //    //       thread.join();
 //    //   }
@@ -65,23 +65,23 @@ public:
 
 void test(Test1* t)
 {
-    //Ö±½ÓÅĞ¶ÏÖ¸ÕëÊÇ·ñÎª¿ÕÊÇ²»ĞĞµÄ
+    //ç›´æ¥åˆ¤æ–­æŒ‡é’ˆæ˜¯å¦ä¸ºç©ºæ˜¯ä¸è¡Œçš„
     if (t == nullptr)
         return;
 
     t->print();
 }
 
-//Õâ¸öÊÇÏß³Ì²»°²È«µÄ
+//è¿™ä¸ªæ˜¯çº¿ç¨‹ä¸å®‰å…¨çš„
 void thread_safe_test()
 {
     Test1 t1(1);
 
     t1.print();
 
-    t1.~Test1();  //Ä£Äâ¶àÏß³Ì»·¾³ÖĞ¶ÔÏó±»Ïú»Ù
+    t1.~Test1();  //æ¨¡æ‹Ÿå¤šçº¿ç¨‹ç¯å¢ƒä¸­å¯¹è±¡è¢«é”€æ¯
 
-    std::thread th1(test, &t1);  //Ä£Äâ¶ÔÏó±»¶à¸öÏß³Ì¿´µ½
+    std::thread th1(test, &t1);  //æ¨¡æ‹Ÿå¯¹è±¡è¢«å¤šä¸ªçº¿ç¨‹çœ‹åˆ°
 
 	th1.join();
 }
@@ -100,9 +100,15 @@ void thread_safe_test_v2()
 {
     std::shared_ptr<Test1> t1 = std::make_shared<Test1>(1);
 
-    t1.reset(); //Ä£Äâ¶àÏß³Ì»·¾³ÖĞ¶ÔÏó±»Ïú»Ù
+	std::shared_ptr<Test1> t2 = t1;
 
-    std::thread th1(test_v2, t1); //Ä£Äâ¶ÔÏó±»¶à¸öÏß³Ì¿´µ½
+	std::cout << t2.use_count() << std::endl;
+
+    t1.reset(); //æ¨¡æ‹Ÿå¤šçº¿ç¨‹ç¯å¢ƒä¸­å¯¹è±¡è¢«é”€æ¯
+
+	std::cout << t2.use_count() << std::endl;
+
+    std::thread th1(test_v2, t1); //æ¨¡æ‹Ÿå¯¹è±¡è¢«å¤šä¸ªçº¿ç¨‹çœ‹åˆ°
 
 	std::cout << t1.use_count() << std::endl;
 
